@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 //import Rest from '../../utils/rest'
 import { useState , useEffect } from 'react'
 import axios from 'axios'
+import Pokeinfo from '../Pokeinfo';
 const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
 const Pokemons = () => {
@@ -68,8 +70,10 @@ const Pokemons = () => {
     console.log(baseUrl+'?'+offset)
     setUrlDestino(baseUrl+'?'+offset)
   }
-
-
+  const redirTo = (pokemonId) => {
+    console.log('Estando na redirTo')
+    return  <Redirect to={'/pokeinfo/' + pokemonId } />
+  }
   if (resul) {
 /*
   
@@ -94,9 +98,10 @@ const Pokemons = () => {
       <table className='table'>
       <thead>
         <tr> 
-          <th> Id </th>
-          <th> Pokemon </th>
-          <th> Url </th>
+          <th style={{width:'10rem', display:'inlineBlock'}}> Id </th>
+          <th style={{width:'15rem', display:'inlineBlock'}}> Pokemon </th>
+          <th style={{width:'07rem', display:'inlineBlock', textAlign:'center'}}> Image </th>
+          <th style={{width:'20rem', display:'inlineBlock'}}> Action </th>
         </tr>
       </thead>
         <tbody>
@@ -106,12 +111,11 @@ const Pokemons = () => {
             .map(pokemonId => {
               return (
                 <tr key={pokemonId}>
-                  <td> {pokemonId}</td>
+                  <td> {whatPoke(contaPoke, pokemonId)}</td>
                   <td>{resul.data.results[pokemonId].name}</td>
-                  <td> <Link to={`https://resul.data.results[pokemonId].url`}>{resul.data.results[pokemonId].url}</Link></td>
-                  <td><img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${whatPoke(contaPoke, pokemonId)}.png`} className="card-img-top" alt="..."/></td>
-                  <td><button onClick={whatPoke(contaPoke, pokemonId)} className='btn btn-warning'>Consultar</button></td>
-                  <td>{whatPoke(contaPoke, pokemonId)}</td>
+    
+                  <td style={{width:'10rem', display:'inlineBlock'}}><img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${whatPoke(contaPoke, pokemonId)}.png` } className="card-img-top" alt="..."/></td>
+                  <td><Link className="btn btn-warning" to={'/pokeinfo/' + whatPoke(contaPoke, pokemonId)}>Info</Link></td>
                 </tr>                    
               )
             })
@@ -135,8 +139,9 @@ const Pokemons = () => {
             <div className="card-body">
               <h5 className="card-title">{resul.data.results[pokemonId].name}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <p>  AAA {`whatPoke(contaPoke, pokemonId)`}</p>
+              <p>   {`whatPoke(contaPoke, pokemonId)`}</p>
               <a href="#" className="btn btn-primary">More Information</a>
+
             </div>
           </div>
           
@@ -154,3 +159,5 @@ const Pokemons = () => {
 
 
 export default Pokemons
+
+
