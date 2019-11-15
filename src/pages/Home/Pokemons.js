@@ -131,10 +131,11 @@ const Pokemons = () => {
           return (
 
             <div className='card' style={{width:'14rem', display:'inlineBlock'}} key={pokemonId}>
-            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${parseInt(pokemonId)+1}.png`} className="card-img-top" alt="..."/>
+            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${whatPoke(contaPoke, pokemonId)}.png`} className="card-img-top" alt="..."/>
             <div className="card-body">
               <h5 className="card-title">{resul.data.results[pokemonId].name}</h5>
               <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <p>  AAA {`whatPoke(contaPoke, pokemonId)`}</p>
               <a href="#" className="btn btn-primary">More Information</a>
             </div>
           </div>
