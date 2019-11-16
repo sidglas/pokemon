@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './elements/Header'
 import Home from './pages/Home'
-import Pokeinfo from './pages/Pokeinfo'
+import Pokeinfo from './pages/PokeInfo'
 
 
 function App() {

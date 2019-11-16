@@ -12,6 +12,7 @@ const Pokemons = () => {
   const[data, setData] = useState({})    
   const[resul, setResul] = useState('')
   const[contaPoke, setContaPoke] = useState(20)  
+  //const[whichPoke, setWhichPoke] = useState(0)  
   const[urlDestino,setUrlDestino]= useState('https://pokeapi.co/api/v2/pokemon') 
   const[urlPokemon,setUrlPokemon]= useState('') 
 
@@ -20,13 +21,48 @@ const Pokemons = () => {
   const loadPoke = async () => {
     const res = await axios.get(urlDestino)
     setResul(res)
+    console.log('res . data ', res.data)
+    console.log('RES RES RES', res)
+    
     }
+
     loadPoke()
+    
+ // console.log('espero ter feito parte 01 da carga ', resul )
+  for (let jjj = 1; jjj < 4 ; jjj++) {
+    console.log('testando rapidamente' + jjj)
+  }
+
    }, [urlDestino])
+
+
+/* foi passada para dentro do useEffect
+
+    const loadPokeDetails = async () => {
+      resul.data.results.map((newLink) => {
+         return newLink.url = 'aaaa' + newLink.url + 'bbbb'
+      })
+    }
+    loadPokeDetails()
+ */
+/*
+  const loadPokeDetails = async () => {
+    const detalhe = await axios.get(urlPokemon)
+    await sleep(3000)
+    console.log (detalhe)
+  }
+*/
+ 
+
+ const numbers = [1, 2, 3, 4, 5];
+ const listItems = numbers.map ( (number) => { return   number * 3})
+ //const pegaVolta = (resul.data.results).map ((voltou) => { return voltou})
 
  const whatPoke = (contaPoke, pokemonId) => {
    return( contaPoke + parseInt(pokemonId) -19)
  }
+ const sleep = time => new Promise(resolve => setTimeout(resolve,time))
+
   const showNext = () => {
     setContaPoke(contaPoke + 20)
     console.log(contaPoke)
@@ -39,6 +75,23 @@ const Pokemons = () => {
     return  <Redirect to={'/pokeinfo/' + pokemonId } />
   }
   if (resul) {
+/*
+  
+    Object
+    .keys(resul.data.results)
+    .map(pokemonId => {
+      setUrlPokemon(resul.data.results[pokemonId].url)
+      return (
+      //setUrlPokemon(resul.data.results[pokemonId].url)
+      loadPokeDetails(resul.data.results[pokemonId].url)
+      
+     )
+    })
+  */  
+
+  //if (Object.keys(data.data).length > 0) {  
+  //if (data.data) {
+
     return (
       <>
       <div className ='container'>
@@ -62,9 +115,11 @@ const Pokemons = () => {
                   <td>{resul.data.results[pokemonId].name}</td>
     
                   <td style={{width:'10rem', display:'inlineBlock'}}><img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${whatPoke(contaPoke, pokemonId)}.png` } className="card-img-top" alt="..."/></td>
+                  <td><Link className="btn btn-warning" to={'/pokeinfo/' + whatPoke(contaPoke, pokemonId)}>Info</Link></td>
                   <td><Link className="btn btn-warning" 
                      to={'/pokeinfo?axs=' +  resul.data.results[pokemonId].url}>Info
                      </Link>
+                     resul.data.results[pokemonId].url
                   </td>
                 </tr>                    
               )
@@ -76,6 +131,8 @@ const Pokemons = () => {
       <button className='btn btn-success' onClick={showNext}>Proximos</button>
       </div>      
       <p> {contaPoke} </p>
+      <p> {listItems}</p>
+      <p> pegaVolta</p>
       {
         Object
         .keys(resul.data.results)
@@ -92,14 +149,20 @@ const Pokemons = () => {
 
             </div>
           </div>
+          
+
+    
           )
         })
       }      
+
       </>
     )
   }
   return null
 }
+
+
 export default Pokemons
 
 
