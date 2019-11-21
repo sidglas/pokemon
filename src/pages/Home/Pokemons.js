@@ -1,19 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+
 //import Rest from '../../utils/rest'
 import { useState , useEffect } from 'react'
 import axios from 'axios'
-import Pokeinfo from '../PokeInfo';
+//import Pokeinfo from '../PokeInfo';
 const baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
 const Pokemons = () => {
 
-  const[data, setData] = useState({})    
+  //const[data, setData] = useState({})    
   const[resul, setResul] = useState('')
   const[contaPoke, setContaPoke] = useState(20)  
   const[urlDestino,setUrlDestino]= useState('https://pokeapi.co/api/v2/pokemon') 
-  const[urlPokemon,setUrlPokemon]= useState('') 
+  //const[urlPokemon,setUrlPokemon]= useState('') 
 
   useEffect(() => {
 
@@ -34,10 +34,7 @@ const Pokemons = () => {
     console.log(baseUrl+'?'+offset)
     setUrlDestino(baseUrl+'?'+offset)
   }
-  const redirTo = (pokemonId) => {
-    console.log('Estando na redirTo')
-    return  <Redirect to={'/pokeinfo/' + pokemonId } />
-  }
+
   if (resul) {
     return (
       <>
@@ -63,9 +60,11 @@ const Pokemons = () => {
     
                   <td style={{width:'10rem', display:'inlineBlock'}}><img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${whatPoke(contaPoke, pokemonId)}.png` } className="card-img-top" alt="..."/></td>
                   <td><Link className="btn btn-warning" 
-                     to={'/pokeinfo?axs=' +  resul.data.results[pokemonId].url}>Info
+                     to={'/pokeinfo/' + parseInt(whatPoke(contaPoke, pokemonId))}>Info
+                    
                      </Link>
                   </td>
+                  <td>seria  to={'/pokeinfo?axs=' +  resul.data.results[pokemonId].url}>Info</td>
                 </tr>                    
               )
             })

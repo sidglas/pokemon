@@ -1,36 +1,49 @@
-import React , { useState, useEffect } from 'react'
-import axios from 'axios'
+import React  from 'react'
+import Rest from '../utils/rest'
 
-const PokeInfo = (parm) => {
+const baseUrl = 'https://pokeapi.co/api/v2/'
+const { useGet } = Rest(baseUrl)
 
-  const[resul, setResul]=useState('')
-  useEffect(() => {
-    var axs = getParameterByName('axs')
-    console.log('a x ssss', axs)
-    const loadPokeById = async () => {
-      const res = await axios.get(axs)
-      setResul(res)
-      }
-      loadPokeById()
-  }, [])
+//const PokeInfo = () => {
+const PokeInfo = ({match}) => {
+const infoPoke = useGet(`pokemon/${match.params.data}`)
 
-  const getParameterByName = ( name, url) => {
-    if (!url) url = window.location.href;
-    url = url.toLowerCase(); // correcao em caso de case sensitive
-    name = name.replace(/[[\]]/g, "\\$&").toLowerCase();// correcao em caso de case sensitive
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
 
-  return (
-    <>
-    <pre>{ JSON.stringify(resul) }</pre>
+return (
+  <>
+    <pre>{ JSON.stringify(infoPoke.loading) }</pre>
+    <pre>{ JSON.stringify(infoPoke) }</pre>
+    AAAA{infoPoke.data.loading}
     <h1>Poke Info</h1>
-      <pre> JsssssssZ)</pre>
-    </>
-  ) 
+    {
+      Object
+      .keys(infoPoke)
+      .map(chave => { 
+        if (chave === 'data'){
+          if (infoPoke.data.abilities === undefined ) {
+            return (null )
+          } else {
+            return (        
+              <div key={chave}>
+              <h4>{infoPoke.data.abilities[0].ability['name']}</h4>
+              <h4>{infoPoke.data.abilities[1].ability['name']}</h4>
+              <h4>{infoPoke.data.base_experience}</h4>
+              <h4>{infoPoke.data.height}</h4>
+              <h4>{infoPoke.data.weight}</h4>
+              <h4>{infoPoke.data.sprites['back_default']}</h4>
+              <h4>{infoPoke.data.sprites['back_shiny']}</h4>
+              <h4>{infoPoke.data.sprites['front_default']}</h4>
+              <h4>{infoPoke.data.sprites['front_shiny']}</h4>
+              </div>
+            )
+          }
+        } 
+        return (null) //other keys don't matter
+     })
+    }
+    <h2> outro</h2>
+    <p>  pegaAbilidade      </p>
+  </>
+) 
 }
 export default PokeInfo
