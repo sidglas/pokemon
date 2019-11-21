@@ -1,6 +1,7 @@
 import React  from 'react'
 import Rest from '../utils/rest'
 
+import '../pages/Info/styles.css'
 const baseUrl = 'https://pokeapi.co/api/v2/'
 const { useGet } = Rest(baseUrl)
 
@@ -23,18 +24,91 @@ return (
           if (infoPoke.data.abilities === undefined ) {
             return (null )
           } else {
-            return (        
-              <div key={chave}>
-              <h4>{infoPoke.data.abilities[0].ability['name']}</h4>
-              <h4>{infoPoke.data.abilities[1].ability['name']}</h4>
-              <h4>{infoPoke.data.base_experience}</h4>
-              <h4>{infoPoke.data.height}</h4>
-              <h4>{infoPoke.data.weight}</h4>
-              <h4>{infoPoke.data.sprites['back_default']}</h4>
-              <h4>{infoPoke.data.sprites['back_shiny']}</h4>
-              <h4>{infoPoke.data.sprites['front_default']}</h4>
-              <h4>{infoPoke.data.sprites['front_shiny']}</h4>
+            console.log('Veremos',infoPoke.data.sprites)
+            return ( 
+              <>       
+              <div className='container' key={chave}>
+                <h4>{infoPoke.data.abilities[0].ability['name']}</h4>
+                <h4>{infoPoke.data.abilities[1].ability['name']}</h4>
+                <h4>{infoPoke.data.base_experience}</h4>
+                <h4>{infoPoke.data.height}</h4>
+                <h4>{infoPoke.data.weight}</h4>
               </div>
+              
+
+              <ul style={{display:'inlineBlock'}}>
+
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    console.log ('CONFIRA ', infoPoke.data.sprites[pokeImg])
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    return (
+                      <li style={{width:'10rem', display:'block'}}>
+                      <img src={`${infoPoke.data.sprites[pokeImg]}`} className="card-img-top" alt="..."/>
+                      </li>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              } 
+              </ul>
+
+
+              <ul className="spot-list">
+
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    console.log ('CONFIRA ', infoPoke.data.sprites[pokeImg])
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    return (
+                      <li style={{width:'10rem', display:'block'}}>
+                      <img src={`${infoPoke.data.sprites[pokeImg]}`} className="card-img-top" alt="..."/>
+                      </li>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              } 
+              </ul>
+
+
+
+              <ul className="spot-list">
+
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    return (
+                      <>
+                      <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
+
+                      </>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              } 
+              </ul>
+
+
+
+
+
+            </>
+
+
+
+
+
             )
           }
         } 
