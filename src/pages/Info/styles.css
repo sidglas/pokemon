@@ -64,3 +64,11 @@ ul.badge-list li span {
 	font-size: 15px;
 	color: #999;	
 }
+
+
+div.row col-sm  header {
+	width: 90%;
+	height: 120px;
+	background-size: cover;
+	border-radius: 4px;
+}

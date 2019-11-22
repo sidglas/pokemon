@@ -36,14 +36,14 @@ return (
               
               
               <ul className="badge-list">
-              <li>  <span class="badge badge-warning"> um texto > </span></li>
+              <li>  <span className="badge badge-warning"> um texto > </span></li>
               { Object.keys(infoPoke.data.abilities)
                 .map(pokeAbil => 
                   {
                     if (infoPoke.data.abilities[pokeAbil] !== null) {
                     return (
                       <li key={pokeAbil}>
-                      <span class="badge badge-warning"> { infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
+                      <span className="badge badge-warning"> { infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
                       </li>
                     )
                     } else {
@@ -73,7 +73,7 @@ return (
               } 
               </ul>
 
-
+<p> siviB div </p>
 
 
               <div className="row">
@@ -81,9 +81,11 @@ return (
                 .map(pokeImg => 
                   {
                     if (infoPoke.data.sprites[pokeImg] !== null) {
+                      console.log('jjjjjjjjjjjjjjjjjjjjjjj')
+                      
                     return (
                       <div className="col-sm" key={pokeImg}>
-                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
+                      <img src={`${infoPoke.data.sprites[pokeImg]}`} />
                       </div>
                     )
                     } else {
