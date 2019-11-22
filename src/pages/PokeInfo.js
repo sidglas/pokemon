@@ -36,7 +36,7 @@ return (
               
               
               <ul className="badge-list">
-              <li>  <span className="badge badge-warning"> um texto > </span></li>
+              <li>  <span className="badge badge-success">Abilities: </span></li>
               { Object.keys(infoPoke.data.abilities)
                 .map(pokeAbil => 
                   {
@@ -94,9 +94,6 @@ return (
                   }
                 ) 
               }
-              
-              
-
               </div>             
             
             </>
@@ -108,8 +105,6 @@ return (
         return (null) //other keys don't matter
      })
     }
-    <h2> outro</h2>
-
   </>
 ) 
 }
