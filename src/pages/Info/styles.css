@@ -2,8 +2,8 @@ ul.spot-list {
 	width: 100%;
 	list-style: none;
 	display: grid;
-	grid-template-columns: 2fr 2fr ;
-	grid-gap: 20px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 30px;
 	margin-bottom: 30px;
 }
 
@@ -13,7 +13,7 @@ ul.spot-list li {
 }
 
 ul.spot-list li header {
-	width: 25%;
+	width: 90%;
 	height: 120px;
 	background-size: cover;
 	border-radius: 4px;
@@ -26,6 +26,41 @@ ul.spot-list li strong {
 }
 
 ul.spot-list li span {
+	font-size: 15px;
+	color: #999;	
+}
+
+.badge {
+	width: 8rem;
+	margin-left: 5px;
+	color: #ffffff; 
+}
+
+ul.badge-list {
+	width: 100%;
+	list-style: none;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 0px;
+	
+}
+
+
+
+ul.badge-list li {
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+ul.badge-list li strong {
+	margin-top: 10px;
+	font-size: 24px;
+	color: #444;
+}
+
+ul.badge-list li span {
 	font-size: 15px;
 	color: #999;	
 }

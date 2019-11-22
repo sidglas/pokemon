@@ -16,6 +16,8 @@ return (
     <pre>{ JSON.stringify(infoPoke) }</pre>
     {infoPoke.loading}
     <h1>Poke Info</h1>
+
+
     {
       Object
       .keys(infoPoke)
@@ -27,43 +29,21 @@ return (
             return ( 
               <>       
               <div className='container' key={chave}>
-                <h4>{infoPoke.data.abilities[0].ability['name']}</h4>
                 <h4>Experience :{infoPoke.data.base_experience}</h4>
                 <h4>Height     : {infoPoke.data.height}</h4>
                 <h4>Weight     : {infoPoke.data.weight}</h4>
               </div>
               
-
-              <ul style={{display:'inlineBlock'}}>
-
-              { Object.keys(infoPoke.data.sprites)
-                .map(pokeImg => 
-                  {
-                    if (infoPoke.data.sprites[pokeImg] !== null) {
-                    return (
-                      <li style={{width:'10rem', display:'block'}}>
-                      <img src={`${infoPoke.data.sprites[pokeImg]}`} className="card-img-top" alt="..."/>
-                      </li>
-                    )
-                    } else {
-                      return (null)
-                    }
-                  }
-                ) 
-              } 
-
-
-              </ul>
-              <ul className="spot-list">
-
+              
+              <ul className="badge-list">
+              <li>  <span class="badge badge-warning"> um texto > </span></li>
               { Object.keys(infoPoke.data.abilities)
                 .map(pokeAbil => 
                   {
                     if (infoPoke.data.abilities[pokeAbil] !== null) {
                     return (
                       <li key={pokeAbil}>
-                      <h3>{pokeAbil} </h3>
-                      <span class="badge badge-info">  {infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
+                      <span class="badge badge-warning"> { infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
                       </li>
                     )
                     } else {
@@ -95,11 +75,8 @@ return (
                 ) 
               } 
               </ul>
-
+            
             </>
-
-
-
 
 
             )
