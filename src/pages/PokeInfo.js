@@ -14,7 +14,7 @@ return (
   <>
     <pre>{ JSON.stringify(infoPoke.loading) }</pre>
     <pre>{ JSON.stringify(infoPoke) }</pre>
-    AAAA{infoPoke.data.loading}
+    {infoPoke.loading}
     <h1>Poke Info</h1>
     {
       Object
@@ -24,15 +24,13 @@ return (
           if (infoPoke.data.abilities === undefined ) {
             return (null )
           } else {
-            console.log('Veremos',infoPoke.data.sprites)
             return ( 
               <>       
               <div className='container' key={chave}>
                 <h4>{infoPoke.data.abilities[0].ability['name']}</h4>
-                <h4>{infoPoke.data.abilities[1].ability['name']}</h4>
-                <h4>{infoPoke.data.base_experience}</h4>
-                <h4>{infoPoke.data.height}</h4>
-                <h4>{infoPoke.data.weight}</h4>
+                <h4>Experience :{infoPoke.data.base_experience}</h4>
+                <h4>Height     : {infoPoke.data.height}</h4>
+                <h4>Weight     : {infoPoke.data.weight}</h4>
               </div>
               
 
@@ -41,7 +39,6 @@ return (
               { Object.keys(infoPoke.data.sprites)
                 .map(pokeImg => 
                   {
-                    console.log ('CONFIRA ', infoPoke.data.sprites[pokeImg])
                     if (infoPoke.data.sprites[pokeImg] !== null) {
                     return (
                       <li style={{width:'10rem', display:'block'}}>
@@ -54,19 +51,19 @@ return (
                   }
                 ) 
               } 
+
+
               </ul>
-
-
               <ul className="spot-list">
 
-              { Object.keys(infoPoke.data.sprites)
-                .map(pokeImg => 
+              { Object.keys(infoPoke.data.abilities)
+                .map(pokeAbil => 
                   {
-                    console.log ('CONFIRA ', infoPoke.data.sprites[pokeImg])
-                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    if (infoPoke.data.abilities[pokeAbil] !== null) {
                     return (
-                      <li style={{width:'10rem', display:'block'}}>
-                      <img src={`${infoPoke.data.sprites[pokeImg]}`} className="card-img-top" alt="..."/>
+                      <li key={pokeAbil}>
+                      <h3>{pokeAbil} </h3>
+                      <span class="badge badge-info">  {infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
                       </li>
                     )
                     } else {
@@ -79,6 +76,7 @@ return (
 
 
 
+
               <ul className="spot-list">
 
               { Object.keys(infoPoke.data.sprites)
@@ -86,10 +84,9 @@ return (
                   {
                     if (infoPoke.data.sprites[pokeImg] !== null) {
                     return (
-                      <>
-                      <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
-
-                      </>
+                      <li key={pokeImg}>
+                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
+                      </li>
                     )
                     } else {
                       return (null)
@@ -98,10 +95,6 @@ return (
                 ) 
               } 
               </ul>
-
-
-
-
 
             </>
 
