@@ -73,7 +73,7 @@ return (
               } 
               </ul>
 
-<p> siviB div </p>
+<p> siviC div </p>
 
 
               <div className="row">
