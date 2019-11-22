@@ -54,9 +54,6 @@ return (
               } 
               </ul>
 
-
-
-
               <ul className="spot-list">
 
               { Object.keys(infoPoke.data.sprites)
@@ -75,6 +72,30 @@ return (
                 ) 
               } 
               </ul>
+
+
+
+
+              <div className="row">
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    return (
+                      <div className="col-sm" key={pokeImg}>
+                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
+                      </div>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              }
+              
+              
+
+              </div>             
             
             </>
 
@@ -86,7 +107,7 @@ return (
      })
     }
     <h2> outro</h2>
-    <p>  pegaAbilidade      </p>
+
   </>
 ) 
 }
