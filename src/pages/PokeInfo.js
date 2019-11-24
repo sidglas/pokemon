@@ -11,12 +11,20 @@ const PokeInfo = ({match}) => {
 const infoPoke = useGet(`pokemon/${match.params.data}`)
 
 
+if (infoPoke.loading === true) {
+  return (null)
+}
+
+else {
+
 return (
   <>
     <pre>{ JSON.stringify(infoPoke.loading) }</pre>
     <pre>{ JSON.stringify(infoPoke) }</pre>
     {infoPoke.loading}
-    <h1>Poke Info</h1>
+    <div className='container'>
+      <h1>Poke Info</h1>
+    </div>  
 
 
     {
@@ -25,11 +33,14 @@ return (
       .map(chave => { 
         if (chave === 'data'){
           if (infoPoke.data.abilities === undefined ) {
+            console.log('DADA A SITUAÇÃO')
             return (null )
           } else {
             return ( 
               <>       
               <div className='container' key={chave}>
+              <h5>{ infoPoke.data.id }</h5>
+                <h5>{ infoPoke.data.forms[0].name }</h5>
                 <h4>Experience :{infoPoke.data.base_experience}</h4>
                 <h4>Height     : {infoPoke.data.height}</h4>
                 <h4>Weight     : {infoPoke.data.weight}</h4>
@@ -75,31 +86,50 @@ return (
                 ) 
               } 
               </ul>
-<p> siviC</p> 
+ 
 
-<ul className="spot-list">
-{Object.keys(infoPoke.data.sprites)
-  .map(pokeImg => 
-{ 
+              <ul className="spot-list">
+              {Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+              { 
 
-  if (infoPoke.data.sprites[pokeImg] !== null) {
-    return (
-      <li key={pokeImg}> 
-      <header1  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
-      backgroundRepeat: 'no-repeat'
-        }}/>
-      <strong>Hi, it's nice to see you </strong>
-      <span>Quanto custa?</span>
-      </li>
-    ) 
-} else {
-  return (null)
-}
+                if (infoPoke.data.sprites[pokeImg] !== null) {
+                  let wurl =  infoPoke.data.id 
+                  let xx = '' + wurl
+                  if (wurl < 100) {
+                      xx = '0' + xx
+                  }
+                  if (wurl < 10) {
+                      xx = '0' + xx
+                    
+                  }
+                  wurl = xx
+
+                  console.log('xxxxxxxxxxxxxxxxxxxxx', xx)
+                  return (
+                    <li key={pokeImg}> 
+                    <header1  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
+                    backgroundRepeat: 'no-repeat'
+                      }}/>
+
+                      <header2  style={{backgroundImage:
+                        `url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/${wurl}.png')`,
+                        backgroundRepeat: 'no-repeat'
+                        }}/>
+
+                    <strong>Hi, it's nice to see you </strong>
+                    <span>Quanto custa?</span>
+                    <span>{}</span>
+                    </li>
+                  ) 
+              } else {
+                return (null)
+              }
 
 
-}
-)}
-</ul>
+              }
+              )}
+              </ul>
 
 
               <div className="row">
@@ -111,7 +141,7 @@ return (
                       
                     return (
                       <div className="col-sm" key={pokeImg}>
-                      <img src={`${infoPoke.data.sprites[pokeImg]}`} />
+                      <img src={`${infoPoke.data.sprites[pokeImg]}`} alt=""/>
                       </div>
                     )
                     } else {
@@ -124,7 +154,7 @@ return (
             </>
 
             )
-          }
+          }  
         } 
         return (null) //other keys don't matter
      })
@@ -132,4 +162,5 @@ return (
   </>
 ) 
 }
+        }   
 export default PokeInfo

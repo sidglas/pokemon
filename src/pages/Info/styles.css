@@ -59,6 +59,12 @@ ul.spot-list li header1 {
 	background-size: auto; /*cover*/
 	border-radius: 4px;
 }
+ul.spot-list li header2 {
+	width: 52px;
+	height: 52px;
+	background-size: cover; /*cover*/
+	border-radius: 4px;
+}
 
 ul.spot-list li strong {
 	margin-top: 10px;
