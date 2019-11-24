@@ -3,6 +3,7 @@ import Rest from '../utils/rest'
 
 import '../pages/Info/styles.css'
 const baseUrl = 'https://pokeapi.co/api/v2/'
+//const baseUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'
 const { useGet } = Rest(baseUrl)
 
 //const PokeInfo = () => {
@@ -62,7 +63,9 @@ return (
                     if (infoPoke.data.sprites[pokeImg] !== null) {
                     return (
                       <li key={pokeImg}>
-                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`}}/>
+                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
+                        backgroundRepeat: 'no-repeat'
+                      }}/>
                       </li>
                     )
                     } else {
@@ -72,8 +75,31 @@ return (
                 ) 
               } 
               </ul>
+<p> siviC</p> 
 
-<p> siviC div </p>
+<ul className="spot-list">
+{Object.keys(infoPoke.data.sprites)
+  .map(pokeImg => 
+{ 
+
+  if (infoPoke.data.sprites[pokeImg] !== null) {
+    return (
+      <li key={pokeImg}> 
+      <header1  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
+      backgroundRepeat: 'no-repeat'
+        }}/>
+      <strong>Hi, it's nice to see you </strong>
+      <span>Quanto custa?</span>
+      </li>
+    ) 
+} else {
+  return (null)
+}
+
+
+}
+)}
+</ul>
 
 
               <div className="row">
@@ -95,9 +121,7 @@ return (
                 ) 
               }
               </div>             
-            
             </>
-
 
             )
           }

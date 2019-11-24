@@ -64,7 +64,7 @@ const Pokemons = () => {
                     
                      </Link>
                   </td>
-                  <td>seria  to={'/pokeinfo?axs=' +  resul.data.results[pokemonId].url}>Info</td>
+
                 </tr>                    
               )
             })

@@ -47,8 +47,11 @@ console.log('DENTRO')
           console.log('DDDDDDDDD', baseUrl + resource  + '.json')
           console.log('DDDDDDDDD', baseUrl)
           console.log('DDDDDDDDD', resource)
+          console.log ('recurso ', resource)
           const res = await axios.get(baseUrl + resource) 
-  
+          
+          
+
           console.log('RES.DATA AXIOS NA GET MESMO ', res.data) 
   
           if (res.data.error && Object.keys(res.data.error).length > 0) {
