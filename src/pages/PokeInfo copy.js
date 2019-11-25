@@ -1,136 +1,186 @@
-import React , { useState, useEffect } from 'react'
-import axios from 'axios'
+import React  from 'react'
+import { Badge } from 'reactstrap';
+import Rest from '../utils/rest'
 
-const PokeInfo = () => {
-
-  //const[abili, setAbili]=useState('')
-  const[resul, setResul]=useState({})
-  /*
-  const[abilities, setAbilities] = ([])
-  const[experience, setExperience] = ('')
-  const[height, setHeight] = (0)
-  const[weight, setWeight] = (0)
-  const[sprites,setSprites] = []
-  */
-
-  useEffect(() => {
-    var axs = getParameterByName('axs')
-    //console.log('a x ssss', axs)
-    const loadPokeById = async () => {
-        const res = await axios.get(axs)
-        setResul(res)
-        /*
-        setAbilities(resul.data.abilities)
-        setExperience(resul.data.base_experience)
-        setHeight(resul.data.height)
-        setWeight(resul.data.weight)
-        setSprites(resul.data.sprites)
-        */
-    }
-    loadPokeById()
-  }, [])
+import '../pages/Info/styles.css'
+const baseUrl = 'https://pokeapi.co/api/v2/'
+//const baseUrl = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'
+const { useGet } = Rest(baseUrl)
 
 
-console.log(typeof(resul))
-console.log(resul.map)
-const array_res = []
-for(var i in resul)
-    array_res.push([i, resul[i]]);
-
-console.log('o novo array array_res com elementos', array_res.length)   
-if (array_res.length > 0) {
-  console.log('  0 X  ', array_res[0])
-  console.log('  1 X  ', array_res[1])
-  console.log('  2 X  ', array_res[2])
-  console.log('  3 X  ', array_res[3])
-  console.log('  4 X  ', array_res[4])
-  console.log('  5 X  ', array_res[5])
+const numToStr3 = (num) => {
+   const numStr = num.toString()
+   const numLength = numStr.length 
+   return numLength < 3 ? 
+   '0'.repeat(3 - numLength) + num 
+   : numStr 
 }
 
-const pegaAbilidade = async() => {
 
-  const aaaa = await resul.data
-  console.log('pega abili GGGGGGGGGGGGGGGGGG', aaaa)
-  return 5555
-  //await aaaa.abilities[0].ability['name']
-  //console.log(bbbb)
-  //return  bbbb
-  //console.log('pega abili GGGGGGGGGGGGGGGGGG', resul.data.abilities[0].ability['name'])
-  //return resul.data.abilities[0].ability['name']
+//const PokeInfo = () => {
+const PokeInfo = ({match}) => {
+const infoPoke = useGet(`pokemon/${match.params.data}`)
 
+
+if (infoPoke.loading === true) {
+  return (null)
 }
 
-//  resul.forEach(chave => {
-//    console.log('Chave no forEach', chave)
-    
-//  });
-
-  const getParameterByName = ( name, url) => {
-    if (!url) url = window.location.href;
-    url = url.toLowerCase(); // correcao em caso de case sensitive
-    name = name.replace(/[[\]]/g, "\\$&").toLowerCase();// correcao em caso de case sensitive
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-  if ((resul) && (resul !== {})) {
-  console.log('rrrrr', resul)
-  console.log('rrrrr', resul)
-  console.log('rrrrr', resul)
-  console.log('rrrrr', resul)
-  console.log('rrrrr', resul)
-  console.log('rrrrr', resul)
-  } 
-
-console.log(resul.data)
-//console.log(resul.data.abilities
- console.log(pegaAbilidade ())
- 
+else {
 
 return (
-    <>
-    <pre>{ JSON.stringify(resul) }</pre>
-    <h1>Poke Info</h1>
+  <>
+    <pre>{ JSON.stringify(infoPoke.loading) }</pre>
+    <pre>{ JSON.stringify(infoPoke) }</pre>
+    {infoPoke.loading}
+    <div className='container'>
+      <h1>Poke Info</h1>
+    </div>  
+
+
     {
       Object
-      .keys(resul)
+      .keys(infoPoke)
       .map(chave => { 
         if (chave === 'data'){
-          console.log('é data', resul.data)
-          console.log('é habil', resul.data.abilities)
-          console.log('é habil 0', resul.data.abilities[0].ability['name'])
-          console.log('é habil 0', resul.data.abilities[1])
-          console.log('base_experience ', resul.data.base_experience)
-          return (
-            <div key={chave}>
-              <h4>{resul.data.abilities[0].ability['name']}</h4>
-              <h4>{resul.data.abilities[1].ability['name']}</h4>
-              <h4>{resul.data.base_experience}</h4>
-              <h4>{resul.data.height}</h4>
-              <h4>{resul.data.weight}</h4>
-              <h4>{resul.data.sprites['back_default']}</h4>
-              <h4>{resul.data.sprites['back_shiny']}</h4>
-              <h4>{resul.data.sprites['front_default']}</h4>
-              <h4>{resul.data.sprites['front_shiny']}</h4>
-            </div>
-          )
+          if (infoPoke.data.abilities === undefined ) {
+            console.log('DADA A SITUAÇÃO')
+            return (null )
+          } else {
+            return ( 
+              <>       
+              <div className='container' key={chave}>
+              <h5>{ infoPoke.data.id }</h5>
+                <h5>{ infoPoke.data.forms[0].name }</h5>
+                <h4>Experience :{infoPoke.data.base_experience}</h4>
+                <h4>Height     : {infoPoke.data.height}</h4>
+                <h4>Weight     : {infoPoke.data.weight}</h4>
+              </div>
+              
 
-        }else{
-          console.log('a chave é ', chave)
+              <ul className="badge-list">
+              <li>  <span className="badge badge-success">Abilities: </span></li>
+              { Object.keys(infoPoke.data.abilities)
+                .map(pokeAbil => 
+                  {
+                    if (infoPoke.data.abilities[pokeAbil] !== null) {
+                    return (
+                      <li key={pokeAbil}>
+                      <span className="badge badge-warning"> { infoPoke.data.abilities[pokeAbil].ability['name']}  </span>
+                      </li>
+                      )
+                    } else {
+                      return(null)
+                    }  
+                  }
+                ) 
+              } 
+              </ul>
 
-        }
-           
-        return (
-       <p key={chave}> {chave}</p> )
-       
-    })
+              <ul className="badge-list">
+              <li>  <Badge color="dark">Abilities</Badge></li>
+              { Object.keys(infoPoke.data.abilities)
+                .map(pokeAbil => 
+                  {
+                    if (infoPoke.data.abilities[pokeAbil] !== null) {
+                    return (
+                      <li key={pokeAbil}>
+                      <Badge color="secondary"> { infoPoke.data.abilities[pokeAbil].ability['name']}  </Badge>
+                      </li>
+                      )
+                    } else {
+                      return(null)
+                    }  
+                  }
+                ) 
+              } 
+              </ul>              
+
+              <ul className="spot-list">
+
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                    return (
+                      <li key={pokeImg}>
+                        <header  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
+                        backgroundRepeat: 'no-repeat'
+                      }}/>
+                      </li>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              } 
+              </ul>
+ 
+
+              <ul className="spot-list">
+              {Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+              { 
+
+                if (infoPoke.data.sprites[pokeImg] !== null) {
+
+                  const id3 = numToStr3(infoPoke.data.id)
+                  return (
+                    <li key={pokeImg}> 
+                    <header1  style={{backgroundImage:`url(${infoPoke.data.sprites[pokeImg]})`,
+                    backgroundRepeat: 'no-repeat'
+                      }}/>
+
+                      <header2  style={{backgroundImage:
+                        `url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/${id3}.png')`,
+                        backgroundRepeat: 'no-repeat'
+                        }}/>
+
+                    <strong>Hi, it's nice to see you </strong>
+                    <span>Quanto custa?</span>
+                    <span>{}</span>
+                    </li>
+                  ) 
+              } else {
+                return (null)
+              }
+
+
+              }
+              )}
+              </ul>
+
+
+              <div className="row">
+              { Object.keys(infoPoke.data.sprites)
+                .map(pokeImg => 
+                  {
+                    if (infoPoke.data.sprites[pokeImg] !== null) {
+                      console.log('jjjjjjjjjjjjjjjjjjjjjjj')
+                      
+                    return (
+                      <div className="col-sm" key={pokeImg}>
+                      <img src={`${infoPoke.data.sprites[pokeImg]}`} alt=""/>
+                      </div>
+                    )
+                    } else {
+                      return (null)
+                    }
+                  }
+                ) 
+              }
+              </div>             
+            </>
+
+            )
+          }  
+        } 
+        return (null) //other keys don't matter
+     })
     }
-    <h2> outro</h2>
-
-    <p>  pegaAbilidade      </p>
-    </>
-  ) 
+  </>
+) 
 }
+        }   
 export default PokeInfo
