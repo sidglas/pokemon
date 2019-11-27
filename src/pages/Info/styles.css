@@ -53,11 +53,12 @@ ul.base-list li header {
 }
 
 .mrg0 {
-	margin: 0px;
+	margin-left: 0px;
+	padding-left: 0px;
 }
 .mrg1 {
 	border-color: brown;
-	border-left-style: double;
+	border-style: double;
 	margin-bottom: 5px;
 }
 ul.spot-list {
@@ -65,7 +66,7 @@ ul.spot-list {
 	list-style: none;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-gap: 20px;
+	grid-gap: 0px;
 	margin-bottom: 30px;
 }
 
@@ -75,10 +76,16 @@ ul.spot-list li {
 }
 
 ul.spot-list li header {
-	width: 100%;
+	width: 45%;
 	height: 96px;
 	background-size: auto; /*cover*/
+	border-color: brown;
+	border-style: double;
 	border-radius: 4px;
+	margin-left: 0px;
+	padding-left: 0px;
+	max-width: 100px;
+	min-width: 96px;
 }
 
 ul.spot-list li header1 {
@@ -118,6 +125,7 @@ ul.badge-list {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 	grid-gap: 0px;
+	padding-left: 0px;
 	
 }
 
