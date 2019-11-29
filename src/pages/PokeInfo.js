@@ -50,15 +50,15 @@ return (
               <>       
               <div className='container' key={chave}>
                 <div>
-                <h5>{ infoPoke.data.id }</h5>
+                  <h5>{ infoPoke.data.id }</h5>
                   <h5>{ infoPoke.data.forms[0].name }</h5>
                 </div>
 
                 <div class="row mrg0 mrg1">
-                  <div class="col-sm-2 ">
+                  <div class="col-sm-9">
                     <img src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${numToStr3(infoPoke.data.id)}.png`} width='100%' alt="Asd" />
                   </div>
-                  <div class="col-sm-3 mrg0" >
+                  <div class="col-sm-7 mrg0" >
                     <h4>Experience :{infoPoke.data.base_experience}</h4>
                     <h4>Height     : {infoPoke.data.height}</h4>
                     <h4>Weight     : {infoPoke.data.weight}</h4>
@@ -85,8 +85,8 @@ return (
                 } 
                 </ul>              
                 <div className='row'>
-                <div className='col-sm-5'>
-                <ul className="spot-list">
+                <div className=' col-11 col-sm-9 col-md-7'>
+                <ul className="spot-list mrg0">
                   { Object.keys(infoPoke.data.sprites)
                     .map(pokeImg => 
                       {
@@ -106,13 +106,11 @@ return (
                   } 
                 </ul>
                 </div>
-                <div className='col-sm-6'>
-                  Uma Homenagem à Rubia Nuernberg, a rainha dos Pokemons e Musa
-                  dos Egipcios. Rubia, a que se banhava a beira do Nilo, ela e
-                  Temer, sem falar, do seu Dentinho, o portador da dentadura!
-
-                  Por outro lado, dona Vera, sua parceira de aventuras nos solos turcos.
-                  Tempos de glória que ambas viveram, sempre rodeadas de pokemons...
+                <div className='col-11 col-sm-9 col-md-5'>
+                  Chega uma hora em que precisamos, apesar de estar aprendendo, formatar o html,
+                  renderizar a saída de nosso react de forma organizada e pelo menos limpa.
+                  Não tendo muita noção de um css extremamente criativo, vale a pena aprender o bootstrap, layout
+                  organizado, limpo e de forma prática. O primeiro passo para posteriormente aprofundar no css.
                 </div>
                 </div>
 
